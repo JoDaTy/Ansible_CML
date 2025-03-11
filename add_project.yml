@@ -5,3 +5,15 @@
     - name: Add project to Cisco CMP
       # Replace with the actual module or command for adding a project
       command: cisco-cmp-cli add project --name "NewProject"
+- name: Configure Router 1 in Cisco CMP
+  hosts: cisco_cmp
+  tasks:
+    - name: Configure Router 1
+      # Replace with the actual module or command for configuring the router
+      command: cisco-cmp-cli config router --project "NewProject" --router "Router1"
+- name: Configure Router 2 in Cisco CMP
+  hosts: cisco_cmp
+  tasks:
+    - name: Configure Router 2
+      # Replace with the actual module or command for configuring the router
+      command: cisco-cmp-cli config router --project "NewProject" --router "Router2"
