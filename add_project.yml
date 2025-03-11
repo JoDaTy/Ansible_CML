@@ -1,0 +1,7 @@
+---
+- name: Add a new project to Cisco CMP
+  hosts: cisco_cmp
+  tasks:
+    - name: Add project to Cisco CMP
+      # Replace with the actual module or command for adding a project
+      command: cisco-cmp-cli add project --name "NewProject"
