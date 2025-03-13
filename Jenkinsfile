@@ -1,18 +1,32 @@
 pipeline {
-    agent any
+    agent {
+        // Use a specific Jenkins agent that has Ansible and Python installed
+        label 'ansible'
+    }
 
     environment {
         ANSIBLE_REPO = 'https://github.com/JoDaTy/Ansible_CML.git'
-        ANSIBLE_BRANCH = 'main'
-        ANSIBLE_VAULT_PASSWORD = credentials('ansible_vault_password') // Assuming you have stored your vault password in Jenkins credentials
+        GIT_CREDENTIALS_ID = 'github-credentials-id' // Replace with your GitHub credentials ID
+        ANSIBLE_VAULT_PASSWORD = credentials('ansible_vault_password') // Ensure this credential is set in Jenkins
     }
 
     stages {
+        stage('Setup Environment') {
+            steps {
+                script {
+                    echo 'Setting up the environment...'
+                    sh 'python3 -m venv venv'
+                    sh '. venv/bin/activate'
+                    sh 'pip install ansible'
+                }
+            }
+        }
+
         stage('Clone Repository') {
             steps {
                 script {
                     echo 'Cloning Ansible playbooks from GitHub...'
-                    git branch: ANSIBLE_BRANCH, url: ANSIBLE_REPO
+                    git branch: 'main', url: ANSIBLE_REPO
                 }
             }
         }
@@ -21,7 +35,7 @@ pipeline {
             steps {
                 script {
                     echo 'Adding new project to Cisco CML using Ansible...'
-                    sh 'ansible-playbook -i inventory add_project.yml --vault-password-file=<(echo $ANSIBLE_VAULT_PASSWORD)'
+                    sh '. venv/bin/activate && ansible-playbook -i inventory add_project.yml --vault-password-file=<(echo $ANSIBLE_VAULT_PASSWORD)'
                 }
             }
         }
