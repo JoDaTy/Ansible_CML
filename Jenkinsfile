@@ -1,7 +1,6 @@
 pipeline {
     agent {
-        // Use a specific Jenkins agent that has Ansible and Python installed
-        label 'ansible'
+        any
     }
 
     environment {
