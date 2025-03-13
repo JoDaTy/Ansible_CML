@@ -37,7 +37,8 @@ pipeline {
                     withCredentials([
                         [$class:'UsernamePasswordMultiBinding', credentialsId: 'cml_credentials', usernameVariable: 'ANSIBLE_USER', passwordVariable: 'ANSIBLE_PASS']
                         ]) {
-                        sh '. venv/bin/activate && ansible-playbook -i inventory add_project.yml --user $ANSIBLE_USER --password $ANSIBLE_PASSWORD'
+                        ansiblePlaybook(credentialsId: 'cml_credentials', inventory: 'inventory', playbook: 'add_project.yml')
+                        //sh '. venv/bin/activate && ansible-playbook -i inventory add_project.yml --user $ANSIBLE_USER --password $ANSIBLE_PASSWORD'
                     }
                 }
             }
