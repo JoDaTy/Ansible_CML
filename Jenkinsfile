@@ -38,6 +38,7 @@ pipeline {
                         [$class:'UsernamePasswordMultiBinding', credentialsId: 'cml_credentials', usernameVariable: 'ANSIBLE_USER', passwordVariable: 'ANSIBLE_PASS']
                         ]) {
                         sh '. venv/bin/activate && ansible-playbook -i inventory.ini add_project.yml -u $ANSIBLE_USER --extra-vars password=$ANSIBLE_PASSWORD'
+                        sh 'ls -al'
                     }
                 }
             }
