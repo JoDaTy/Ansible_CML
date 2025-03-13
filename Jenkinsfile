@@ -6,7 +6,7 @@ pipeline {
 
     environment {
         ANSIBLE_REPO = 'https://github.com/JoDaTy/Ansible_CML.git'
-        GIT_CREDENTIALS_ID = 'github-credentials-id' // Replace with your GitHub credentials ID
+        GIT_CREDENTIALS_ID = '5cab7cea-4256-43df-bf86-63e9d07b8d54' // Replace with your GitHub credentials ID
         ANSIBLE_VAULT_PASSWORD = credentials('ansible_vault_password') // Ensure this credential is set in Jenkins
     }
 
