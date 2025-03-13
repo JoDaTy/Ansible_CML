@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        any
-    }
+    agent any
 
     environment {
         ANSIBLE_REPO = 'https://github.com/JoDaTy/Ansible_CML.git'
