@@ -1,4 +1,4 @@
-pipeline {
+entialspipeline {
     agent any
 
     environment {
@@ -35,7 +35,7 @@ pipeline {
                 script {
                     echo 'Executing Ansible playbooks...'
                     withCredentials([
-                        [$class:'UsernamePasswordMultiBinding', credentialsId: 'cml_username', usernameVariable: 'ANSIBLE_USER', passwordVariable: 'ANSIBLE_PASS']
+                        [$class:'UsernamePasswordMultiBinding', credentialsId: 'cml_credentials', usernameVariable: 'ANSIBLE_USER', passwordVariable: 'ANSIBLE_PASS']
                         ]) {
                         sh '. venv/bin/activate && ansible-playbook -i inventory add_project.yml --user $ANSIBLE_USER --password $ANSIBLE_PASSWORD'
                         sh '. venv/bin/activate && ansible-playbook -i inventory configure_router1.yml --user $ANSIBLE_USER --password $ANSIBLE_PASSWORD'
