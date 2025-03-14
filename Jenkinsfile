@@ -12,8 +12,8 @@ pipeline {
             steps {
                 script {
                     echo 'Setting up the environment...'
-                    sh 'python3 -m venv venv'
-                    sh '. venv/bin/activate'
+                    sh 'python3 -m venv /home/jenkins/agent/workspace/CML_Build/'
+                    sh '. /home/jenkins/agent/workspace/CML_Build//bin/activate'
                     sh 'chown -R jenkins venv'
                     echo '###############################'
                     sh 'whoami'
