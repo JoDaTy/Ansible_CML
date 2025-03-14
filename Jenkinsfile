@@ -13,7 +13,7 @@ pipeline {
                 script {
                     echo 'Setting up the environment...'
                     sh 'python3 -m venv venv'
-                    sh 'cd /home/jenkins/agent/workspace/CML_Build/venv && pip ./bin/activate'
+                    sh 'cd /home/jenkins/agent/workspace/CML_Build/venv && ./bin/activate'
                 }
             }
         }
