@@ -13,8 +13,7 @@ pipeline {
                 script {
                     echo 'Setting up the environment...'
                     sh 'python3 -m venv venv'
-                    sh 'cd /home/jenkins/agent/workspace/CML_Build/venv'
-                    sh '/home/jenkins/agent/workspace/CML_Build/venv/bin/activate && pip install ansible'
+                    sh 'cd /home/jenkins/agent/workspace/CML_Build/venv && pip ./bin/activate'
                 }
             }
         }
