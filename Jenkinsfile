@@ -30,7 +30,6 @@ pipeline {
         stage('Run Ansible') {
                 steps {
                     script {
-                    echo 'Cloning Ansible playbooks from GitHub...'
                     sh 'cd venv'
                     sh 'ls -al'
                 }
