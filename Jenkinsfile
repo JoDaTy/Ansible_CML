@@ -34,13 +34,12 @@ pipeline {
             steps {
                 script {
                     echo 'Executing Ansible playbooks...'
-                    withCredentials([
-                        [$class:'UsernamePasswordMultiBinding', credentialsId: 'cml_credentials', usernameVariable: 'ANSIBLE_USER', passwordVariable: 'ANSIBLE_PASS']
-                        ]) {
-                        sh '''echo -e "username: $ANSIBLE_USER\npassword: $ANSIBLE_PASS" | ansible-vault encrypt_string --vault-password-file <(echo $ANSIBLE_PASS) --stdin-name "credentials" > vault.yml'''
-                        sh '. venv/bin/activate && ansible-playbook -i inventory.ini add_project.yml -u $ANSIBLE_USER --extra-vars password=$ANSIBLE_PASS'
-                        sh 'pwd'
-                        sh 'ls -al'
+                    stage('Run Ansible') {
+                    steps {
+                        ansible(
+                            playbook: 'add_project.yml',
+                            inventory: 'inventory.ini',
+                            vaultCredentialsId: 'cml_credentials' // Replace with your credential ID
                     }
                 }
             }
