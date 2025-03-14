@@ -25,6 +25,8 @@ pipeline {
                     git branch: ANSIBLE_BRANCH, url: ANSIBLE_REPO
                     sh 'echo $PATH'
                     sh 'ls -al'
+                    sh 'cd venv'
+                    sh 'ls -al'
                 }
             }
         }
