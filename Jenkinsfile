@@ -27,18 +27,6 @@ pipeline {
             }
         }
 
-        stage('Setup Ansible Vault') {
-            steps {
-                script {
-                    echo 'Setting up Ansible vault...'
-                    withCredentials([
-                        [$class:'UsernamePasswordMultiBinding', credentialsId: 'Ansible_Vault_Secret', Variable: 'VAULT_PASS']
-                        ]) {
-                        sh 'echo "your_secret_data" | ansible-vault encrypt_string --vault-password-file <(echo $VAULT_PASS) --stdin-name "password" > your_vault_file.yml'
-                }
-            }
-        }
-        
         stage('Run Ansible Playbooks') {
             environment {
                 ANSIBLE_HOST_KEY_CHECKING = 'False'
@@ -49,6 +37,7 @@ pipeline {
                     withCredentials([
                         [$class:'UsernamePasswordMultiBinding', credentialsId: 'cml_credentials', usernameVariable: 'ANSIBLE_USER', passwordVariable: 'ANSIBLE_PASS']
                         ]) {
+                        sh '''ansible-vault encrypt_string --vault-password-file < (echo $ANSIBLE_PASSWORD) --stdin-name ANSIBLE_USER > vault.yml'''
                         sh '. venv/bin/activate && ansible-playbook -i inventory.ini add_project.yml -u $ANSIBLE_USER --extra-vars password=$ANSIBLE_PASSWORD'
                         sh 'pwd'
                         sh 'ls -al'
