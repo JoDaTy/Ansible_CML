@@ -16,6 +16,7 @@ pipeline {
                     sh '. venv/bin/activate'
                     sh 'chown -R jenkins venv'
                     echo '###############################'
+                    sh 'whoami'
                     sh 'pwd'
                     sh 'cd /home/jenkins/agent/workspace/CML_Build/venv'
                     sh 'pwd'
