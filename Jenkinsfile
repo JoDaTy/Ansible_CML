@@ -31,7 +31,6 @@ pipeline {
         stage('Run Ansible') {
                 steps {
                     script {
-                    sh 'cd venv'
                     sh 'ls -al'
                 }
                     ansiblePlaybook (
