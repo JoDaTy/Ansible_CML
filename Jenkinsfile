@@ -24,6 +24,7 @@ pipeline {
                     echo 'Cloning Ansible playbooks from GitHub...'
                     git branch: ANSIBLE_BRANCH, url: ANSIBLE_REPO
                     sh 'echo $PATH'
+                    sh 'ls -al'
                 }
             }
         }
