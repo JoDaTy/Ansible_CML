@@ -14,6 +14,7 @@ pipeline {
                     echo 'Setting up the environment...'
                     sh 'python3 -m venv venv'
                     sh '. venv/bin/activate && pip install ansible'
+                    cd venv
                 }
             }
         }
@@ -32,8 +33,10 @@ pipeline {
                     ansiblePlaybook (
                             playbook: 'add_project.yml',
                             inventory: 'inventory.ini',
-                            vaultCredentialsId: 'cml_credentials' // Replace with your credential ID
-                )
+                            credentialsId: 'cml_credentials'
+                            hostKeyChecking: false,
+                            colorized: true
+                    )
             }
         }
     }
