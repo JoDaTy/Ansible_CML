@@ -13,13 +13,12 @@ pipeline {
                 script {
                     echo 'Setting up the environment...'
                     sh 'python3 -m venv /home/jenkins/agent/workspace/CML_Build/'
-                    sh '. /home/jenkins/agent/workspace/CML_Build//bin/activate'
+                    sh '. /home/jenkins/agent/workspace/CML_Build/bin/activate'
                     sh 'chown -R jenkins venv'
                     echo '###############################'
                     sh 'whoami'
                     sh 'pwd'
-                    sh 'cd /home/jenkins/agent/workspace/CML_Build/venv/'
-                    sh 'pwd'
+                    sh 'ls -al'
                     echo '###############################'
                 }
             }
