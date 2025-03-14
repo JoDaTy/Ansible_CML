@@ -13,7 +13,8 @@ pipeline {
                 script {
                     echo 'Setting up the environment...'
                     sh 'python3 -m venv venv'
-                    sh '. venv/bin/activate && pip install ansible'
+                    sh 'cd venv'
+                    sh '. bin/activate && pip install ansible'
                 }
             }
         }
@@ -46,7 +47,7 @@ pipeline {
         stage('Tidy up') {
             steps {
                 script {
-                    echo 'Cloning Ansible playbooks from GitHub...'
+                    echo 'Deactivte Python virtual environment'
                     sh 'deactivate'
                 }
             }
