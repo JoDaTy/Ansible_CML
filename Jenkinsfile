@@ -33,7 +33,7 @@ pipeline {
                     ansiblePlaybook (
                             playbook: 'add_project.yml',
                             inventory: 'inventory.ini',
-                            credentialsId: 'cml_credentials'
+                            credentialsId: 'cml_credentials',
                             hostKeyChecking: false,
                             colorized: true
                     )
