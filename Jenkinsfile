@@ -14,7 +14,7 @@ pipeline {
                     echo 'Setting up the environment...'
                     sh 'python3 -m venv venv'
                     sh '. venv/bin/activate'
-                    sh 'chown venv jenkins'
+                    sh 'chown -R jenkins venv'
                     echo '###############################'
                     sh 'pwd'
                     sh 'cd /home/jenkins/agent/workspace/CML_Build/venv'
