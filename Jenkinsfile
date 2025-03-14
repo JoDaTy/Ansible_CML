@@ -14,7 +14,6 @@ pipeline {
                     echo 'Setting up the environment...'
                     sh 'python3 -m venv venv'
                     sh '. venv/bin/activate && pip install ansible'
-                    sh 'cd venv'
                 }
             }
         }
@@ -28,6 +27,18 @@ pipeline {
             }
         }
 
+        stage('Setup Ansible Vault') {
+            steps {
+                script {
+                    echo 'Setting up Ansible vault...'
+                    withCredentials([
+                        [$class:'UsernamePasswordMultiBinding', credentialsId: 'Ansible_Vault_Secret', Variable: 'VAULT_PASS']
+                        ]) {
+                        sh 'echo "your_secret_data" | ansible-vault encrypt_string --vault-password-file <(echo $VAULT_PASS) --stdin-name "password" > your_vault_file.yml'
+                }
+            }
+        }
+        
         stage('Run Ansible Playbooks') {
             environment {
                 ANSIBLE_HOST_KEY_CHECKING = 'False'
