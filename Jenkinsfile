@@ -18,7 +18,7 @@ pipeline {
                     echo '###############################'
                     sh 'whoami'
                     sh 'pwd'
-                    sh 'cd /home/jenkins/agent/workspace/CML_Build/venv'
+                    sh 'cd /home/jenkins/agent/workspace/CML_Build/venv/'
                     sh 'pwd'
                     echo '###############################'
                 }
