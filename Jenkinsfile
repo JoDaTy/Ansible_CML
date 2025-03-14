@@ -27,20 +27,12 @@ pipeline {
             }
         }
 
-        stage('Run Ansible Playbooks') {
-            environment {
-                ANSIBLE_HOST_KEY_CHECKING = 'False'
-            }
-            steps {
-                script {
-                    echo 'Executing Ansible playbooks...'
-                    stage('Run Ansible') {
-                    steps {
-                        ansible(
+        stage('Run Ansible') {
+                steps {
+                    ansible(
                             playbook: 'add_project.yml',
                             inventory: 'inventory.ini',
                             vaultCredentialsId: 'cml_credentials' // Replace with your credential ID
-                    }
                 }
             }
         }
