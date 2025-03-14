@@ -29,7 +29,7 @@ pipeline {
 
         stage('Run Ansible') {
                 steps {
-                    ansible(
+                    ansiblePlaybook (
                             playbook: 'add_project.yml',
                             inventory: 'inventory.ini',
                             vaultCredentialsId: 'cml_credentials' // Replace with your credential ID
