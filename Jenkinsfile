@@ -31,6 +31,7 @@ pipeline {
         stage('Run Ansible') {
                 steps {
                     script {
+                    sh 'cd /home/jenkins/agent/workspace/CML_Build/venv'
                     sh 'ls -al'
                 }
                     ansiblePlaybook (
