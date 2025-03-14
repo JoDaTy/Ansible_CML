@@ -42,6 +42,15 @@ pipeline {
                  )
             }
         }
+
+        stage('Tidy up') {
+            steps {
+                script {
+                    echo 'Cloning Ansible playbooks from GitHub...'
+                    sh 'deactivate'
+                }
+            }
+        }
     }
 
     post {
