@@ -23,23 +23,24 @@ pipeline {
                 script {
                     echo 'Cloning Ansible playbooks from GitHub...'
                     git branch: ANSIBLE_BRANCH, url: ANSIBLE_REPO
-                    sh 'echo $PATH'
-                    sh 'ls -al'
-                    sh 'cd venv'
-                    sh 'ls -al'
                 }
             }
         }
 
         stage('Run Ansible') {
                 steps {
+                    script {
+                    echo 'Cloning Ansible playbooks from GitHub...'
+                    sh 'cd venv'
+                    sh 'ls -al'
+                }
                     ansiblePlaybook (
                             playbook: 'add_project.yml',
                             inventory: 'inventory.ini',
                             credentialsId: 'cml_credentials',
                             hostKeyChecking: false,
                             colorized: true
-                    )
+                 )
             }
         }
     }
