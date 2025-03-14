@@ -37,7 +37,7 @@ pipeline {
                     withCredentials([
                         [$class:'UsernamePasswordMultiBinding', credentialsId: 'cml_credentials', usernameVariable: 'ANSIBLE_USER', passwordVariable: 'ANSIBLE_PASS']
                         ]) {
-                        //sh 'ansible-vault encrypt_string --vault-password-file <(echo $ANSIBLE_PASS) --stdin-name "credentials" > vault.yml'
+                        sh '''echo -e "username: $ANSIBLE_USER\npassword: $ANSIBLE_PASS" | ansible-vault encrypt_string --vault-password-file <(echo $ANSIBLE_PASS) --stdin-name "credentials" > vault.yml'''
                         sh '. venv/bin/activate && ansible-playbook -i inventory.ini add_project.yml -u $ANSIBLE_USER --extra-vars password=$ANSIBLE_PASS'
                         sh 'pwd'
                         sh 'ls -al'
