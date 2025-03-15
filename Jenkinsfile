@@ -18,7 +18,6 @@ pipeline {
                     echo '###############################'
                     sh 'whoami'
                     sh 'pwd'
-                    sh 'ansible --version'
                     sh 'ls -al'
                     echo '###############################'
                 }
