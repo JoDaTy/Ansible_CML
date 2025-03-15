@@ -35,17 +35,7 @@ pipeline {
 
         stage('Run Ansible') {
                 steps {
-                    script {
-                    sh 'cd /home/jenkins/agent/workspace/CML_Build/venv'
-                    sh 'ls -al'
-                }
-                    ansiblePlaybook (
-                            playbook: 'add_project.yml',
-                            inventory: 'inventory.ini',
-                            credentialsId: 'cml_credentials',
-                            hostKeyChecking: false,
-                            colorized: true
-                 )
+                    ansiblePlaybook colorized: true, credentialsId: 'CML_Creds', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'inventory.ini', playbook: '/home/jenkins/agent/workspace/CML_Build/', vaultTmpPath: ''
             }
         }
 
